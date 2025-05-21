@@ -4,7 +4,7 @@
 
 ![hands-please](https://github.com/joseferben/hands-please/blob/main/hands-please.gif)
 
-`hands-please` runs Claude Code or OpenAI Codex locally based on your code comments. Comments in the codebase is the only way to communicate with the code agents.
+`hands-please` watches your code for `// @ai do something` and then runs Claude Code or OpenAI Codex in the background.
 
 ## Example
 

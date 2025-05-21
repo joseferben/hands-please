@@ -1,0 +1,30 @@
+name: 🚀 ci
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        node-version: [22]
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.1.0
+      - name: use node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: pnpm install
+        run: pnpm install
+      - name: pnpm build
+        run: pnpm build
+      - name: pnpm check
+        run: pnpm check

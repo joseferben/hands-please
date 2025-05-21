@@ -1,6 +1,6 @@
 <!-- hands-please-ignore -->
 
-# hands-please
+# hands-please 🫱
 
 ![hands-please](https://github.com/joseferben/hands-please/blob/main/hands-please.gif)
 
@@ -31,7 +31,7 @@ describe("division", () => {
 ```bash
 $ npx hands-please
 ⠏ Watching for comments with "@ai"....
-ℹ 🤖 Processing comment src/math.test.ts:194
+ℹ 🫱 Processing comment src/math.test.ts:194
 ℹ  🤖 I'll implement the test case for division by zero as requested in the comment.
 ℹ  🤖 Added test case that verifies division by zero returns Infinity in JavaScript.
 ℹ  💸 $0.04 in 12.38s

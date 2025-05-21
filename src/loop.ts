@@ -62,7 +62,7 @@ ${comment.filepath}:${comment.line}:
 ${comment.context}
 </comment>
 `;
-  consola.info(`🖐  Processing comment ${comment.filepath}:${comment.line}`);
+  consola.info(` 🫱 Processing comment ${comment.filepath}:${comment.line}`);
   while (shouldRun) {
     shouldRun = false;
     // 1. run agent

@@ -1,0 +1,8 @@
+{
+  "include": ["**/*.ts", "eslint.config.mjs"],
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext"
+  }
+}

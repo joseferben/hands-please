@@ -1,8 +1,8 @@
 {
   "name": "hands-please",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
-  "description": "Orchestrate Claude Code or OpenAI Codex locally based on comments in your codebase.",
+  "description": "Run CLI code agents based on comments in your codebase.",
   "files": [
     "dist",
     "README.md"
@@ -40,7 +40,6 @@
     "citty": "^0.1.6",
     "consola": "^3.4.2",
     "dotenv": "^16.5.0",
-    "execa": "^9.5.3",
     "ignore": "^7.0.4",
     "minimatch": "^10.0.1",
     "ora": "^8.2.0",

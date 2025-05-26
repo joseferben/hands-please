@@ -1,18 +1,18 @@
-import { parseComments } from "./comment.js";
+import { parse } from "./comment.js";
 import { it, expect, describe } from "vitest";
-import { getConfig } from "./config.js";
 
-getConfig().COMMENT_TAG = "lug";
+const trigger = "@foo";
 
-describe("parseComments()", () => {
+describe("parse()", () => {
   it("should handle import statements and track line numbers correctly", () => {
-    const comments = parseComments({
+    const comments = parse({
+      trigger,
       filepath: "imports.js",
       content: `import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// @${getConfig().COMMENT_TAG} implement API fetching logic
+// ${trigger} implement API fetching logic
 function DataFetcher() {
   return null;
 }
@@ -27,9 +27,10 @@ function DataFetcher() {
 
 describe("parseComments() additional cases", () => {
   it("should handle when first line is @ai and the next line is a comment", () => {
-    const comments = parseComments({
+    const comments = parse({
+      trigger,
       filepath: "firstline.js",
-      content: `// @${getConfig().COMMENT_TAG}
+      content: `// ${trigger}
 // This is a regular comment
 function example() {
   return true;
@@ -42,11 +43,12 @@ function example() {
   });
 
   it("should parse comments with emojis", () => {
-    const comments = parseComments({
+    const comments = parse({
+      trigger,
       filepath: "test.js",
       content: `
     function emojis() {
-      // @${getConfig().COMMENT_TAG} emojis: 😀, 🚀, 👍
+      // ${trigger} emojis: 😀, 🚀, 👍
     }
   `,
     });
@@ -57,11 +59,12 @@ function example() {
   });
 
   it("should parse comments with code snippets", () => {
-    const comments = parseComments({
+    const comments = parse({
+      trigger,
       filepath: "code.js",
       content: `
     function example() {
-      // @${getConfig().COMMENT_TAG} code: console.log('Hello world')
+      // ${trigger} code: console.log('Hello world')
       return true;
     }
   `,
@@ -73,13 +76,14 @@ function example() {
   });
 
   it("should parse multi-line comments", () => {
-    const comments = parseComments({
+    const comments = parse({
+      trigger,
       filepath: "multiline.js",
       content: `
     function multiLineExample() {
-      // @${getConfig().COMMENT_TAG} first line of a multi-line comment
+      // ${trigger} first line of a multi-line comment
       // second line that should be captured
-      // @${getConfig().COMMENT_TAG} another tagged comment line
+      // ${trigger} another tagged comment line
       return true;
     }
   `,
@@ -96,11 +100,12 @@ function example() {
   });
 
   it("should handle continuation lines with varying indentation", () => {
-    const comments = parseComments({
+    const comments = parse({
+      trigger,
       filepath: "indentation.js",
       content: `
 function indentationExample() {
-  // @${getConfig().COMMENT_TAG} first line with normal indentation
+  // ${trigger} first line with normal indentation
   //    second line with extra indentation
   //  third line with different indentation
   // fourth line with normal indentation
@@ -118,11 +123,12 @@ function indentationExample() {
 
   describe("ignoring files with 'hands-please-ignore' in first line", () => {
     it("should ignore JavaScript files with // hands-please-ignore", () => {
-      const comments = parseComments({
+      const comments = parse({
+        trigger,
         filepath: "javascript.js",
         content: `// hands-please-ignore
 function example() {
-  // @${getConfig().COMMENT_TAG} this should be ignored
+  // ${trigger} this should be ignored
   return true;
 }`,
       });
@@ -130,11 +136,12 @@ function example() {
     });
 
     it("should ignore JavaScript files with /* hands-please-ignore */", () => {
-      const comments = parseComments({
+      const comments = parse({
+        trigger,
         filepath: "javascript-multiline.js",
         content: `/* hands-please-ignore */
 function example() {
-  // @${getConfig().COMMENT_TAG} this should be ignored
+  // ${trigger} this should be ignored
   return true;
 }`,
       });
@@ -142,11 +149,12 @@ function example() {
     });
 
     it("should ignore HTML files with <!-- hands-please-ignore -->", () => {
-      const comments = parseComments({
+      const comments = parse({
+        trigger,
         filepath: "index.html",
         content: `<!-- hands-please-ignore -->
 <html>
-  <!-- @${getConfig().COMMENT_TAG} this should be ignored -->
+  <!-- ${trigger} this should be ignored -->
   <body>
     <h1>Hello World</h1>
   </body>
@@ -156,35 +164,38 @@ function example() {
     });
 
     it("should ignore Python files with # hands-please-ignore", () => {
-      const comments = parseComments({
+      const comments = parse({
+        trigger,
         filepath: "script.py",
         content: `# hands-please-ignore
 def example():
-    # @${getConfig().COMMENT_TAG} this should be ignored
+    # ${trigger} this should be ignored
     return True`,
       });
       expect(comments).toHaveLength(0);
     });
 
     it("should ignore Python files with ''' hands-please-ignore", () => {
-      const comments = parseComments({
+      const comments = parse({
+        trigger,
         filepath: "script-multiline.py",
         content: `''' hands-please-ignore
 Some docstring content
 '''
 def example():
-    # @${getConfig().COMMENT_TAG} this should be ignored
+    # ${trigger} this should be ignored
     return True`,
       });
       expect(comments).toHaveLength(0);
     });
 
     it("should ignore SQL files with -- hands-please-ignore", () => {
-      const comments = parseComments({
+      const comments = parse({
+        trigger,
         filepath: "query.sql",
         content: `-- hands-please-ignore
 SELECT * FROM users
--- @${getConfig().COMMENT_TAG} this should be ignored
+-- ${trigger} this should be ignored
 WHERE id = 1;`,
       });
       expect(comments).toHaveLength(0);

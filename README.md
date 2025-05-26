@@ -1,21 +1,25 @@
 <!-- hands-please-ignore -->
 
-# hands-please 🫱
-
 ![hands-please](https://github.com/joseferben/hands-please/blob/main/hands-please.gif)
 
-`hands-please` watches your code for `// @ai do something` and then runs Claude Code or OpenAI Codex in the background.
+# hands-please 🫱
+
+`hands-please`
+
+1. watches the codebase for `// @ai do something`
+2. runs Claude Code or OpenAI Codex in the background with the prompt from the comment
+3. fixes build/lint issues
 
 ## Example
 
-1. Run `hands-please`
+1. Run `hands-please` with required arguments
 
 ```bash
-$ npx hands-please
+$ npx hands-please@latest --agent 'claude --print --output-format stream-json --verbose --allowedTools "Edit,Write,WebFetch"' --check 'npm run check' --file-check 'npm run lint'
 ⠏ Watching for comments with "@ai"....
 ```
 
-2. Add a comment to your code with `@ai`
+2. Add a comment
 
 ```typescript
 // @ai add a test case to divide by 0
@@ -26,55 +30,61 @@ describe("division", () => {
 });
 ```
 
-3. `hands-please` picks up the comment and runs the code agents until all check, builds and tests pass.
+3. `hands-please` runs an agent until the checks pass
 
 ```bash
-$ npx hands-please
+$ npx hands-please@latest --agent 'claude --print --output-format stream-json --verbose --allowedTools "Edit,Write,WebFetch"' --check 'npm run check' --file-check 'npm run lint'
 ⠏ Watching for comments with "@ai"....
 ℹ 🫱 Processing comment src/math.test.ts:194
 ℹ  🤖 I'll implement the test case for division by zero as requested in the comment.
 ℹ  🤖 Added test case that verifies division by zero returns Infinity in JavaScript.
 ℹ  💸 $0.04 in 12.38s
-ℹ  ✓ $ pnpm lint
-ℹ  ✓ $ pnpm check
+ℹ  ✓ $ npm run lint
+ℹ  ✓ $ npm run check
 ℹ  ✓ All checks passed
 ⠙ Watching files for "@ai"....
 ```
 
 ## Configuration
 
-Example `.env`
+`hands-please` is configured using command line arguments:
 
 ```bash
-# The code agent that makes the changes, either "claude-code" or "codex"
-AGENT="claude-code"
-# The command to run to a full build, check and tests
-CHECK="pnpm check"
-# Per-file check that can be called like `pnpm lint src/math.test.ts`
-FILE_CHECK="pnpm lint"
-# The tag hands-please will look for in the codebase
-COMMENT_TAG="ai"
+# Basic usage
+npx hands-please --agent <agent-command> --check <check-command> --file-check <file-check-command> [options]
+
+# Options:
+#   --agent        The command to run the AI agent in non-interactive mode(required)
+#   --check        The command to check the codebase (required)
+#   --file-check   The command to check specific files (required)
+#   --trigger      The tag that triggers comment processing (default: "@ai")
+#   --skip-watch   Exit after processing all comments (default: false)
+```
+
+Example for Claude Code:
+
+```bash
+pnpm dlx hands-please@latest \
+  --agent 'claude --print --output-format stream-json --verbose --allowedTools "Edit,Write,WebFetch"' \
+  --check 'pnpm check' \
+  --file-check 'pnpm lint'
 ```
 
 ## Motivation
 
-I wanted the productivity of vibe coding without the mess: Running local code agents with surgical precision based on my comments in the codebase.
+I wanted the productivity of vibe coding without the mess: Running local coding agents with surgical precision based on comments.
 
 There is no chat interface, the only way to interact with the code agents is through code comments.
 
-This requires a tight automated feedback loop. It is important to provide commands that check, lint, build and test the code after the agent made changes.
+Workflow:
 
-The workflow is simple:
+1. Pick up a comment containing `@ai`
+2. Run agent with prompt from comment or linting issues
+3. Run file-check command on changed files, on error go to 2.
+4. Run full codebase check command, on error go to 2.
+5. => Done! Process next comment.
 
-1. Make comment containing `@ai`
-2. Code agent runs with comment as prompt
-3. Once it is done `FILE_CHECK <file1> <file2>` is executed on changed files, on error go to 2.
-4. On success, `CHECK` is executed, on error go to 2.
-5. On success, we are done and can review code that passed all checks
-
-Running file-specific checks makes sure that the feedback for the code agent is relevant to the changes it made. This allows us to work in parallel on different parts of the codebase.
-
-For `hands-please` to work well it's important to provide a file-specific `FILE_CHECK` check. This allows `hands-please` to run checks only on changed files and provide feedback to the code agent that is relevant to the changes it made. => Super fast feedback loop!
+For `hands-please` to work well it's important to provide a file-specific check using the `--file-check` option like `eslint` that works with `eslint <file1> <file2>`. This allows `hands-please` to run checks only on changed files and provide feedback to the code agent that is relevant to the changes it made. => Super fast feedback loop!
 
 ## Inspiration
 

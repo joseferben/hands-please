@@ -17,30 +17,34 @@ const builtInIgnores = [
 let ig: ignore.Ignore;
 
 export function shouldIgnore({ path }: { path: string }) {
-  if (path === ".") return false;
-  const shouldIgnore =
-    ig?.ignores(path) ||
-    builtInIgnores.some((pattern) => minimatch(path, pattern));
-  return shouldIgnore;
+  try {
+    if (path === ".") return false;
+    const shouldIgnore =
+      ig?.ignores(path) ||
+      builtInIgnores.some((pattern) => minimatch(path, pattern));
+    return shouldIgnore;
+  } catch {
+    return false;
+  }
 }
 
 function findGitignore(startDir: string): string | null {
   let currentDir = resolve(startDir);
-  
+
   while (true) {
     const gitignorePath = join(currentDir, ".gitignore");
-    
+
     if (existsSync(gitignorePath)) {
       return gitignorePath;
     }
-    
+
     const parentDir = dirname(currentDir);
-    
+
     // If we've reached the root directory
     if (parentDir === currentDir) {
       return null;
     }
-    
+
     currentDir = parentDir;
   }
 }
@@ -48,7 +52,7 @@ function findGitignore(startDir: string): string | null {
 export async function createIgnore() {
   if (!ig) {
     const gitignorePath = findGitignore(process.cwd());
-    
+
     if (gitignorePath) {
       consola.debug(`Reading ${gitignorePath}`);
       const gitignore = await readFile(gitignorePath, "utf-8");
@@ -58,7 +62,7 @@ export async function createIgnore() {
       ig = ignore();
     }
   }
-  
+
   return {
     shouldIgnore: ({ path }: { path: string }) => shouldIgnore({ path }),
   };

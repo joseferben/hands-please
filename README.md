@@ -12,14 +12,11 @@
 
 ## Example
 
-1. Run `hands-please` with required arguments
-
 ```bash
 $ npx hands-please@latest --agent 'claude --print --output-format stream-json --verbose --allowedTools "Edit,Write,WebFetch"' --check 'npm run check' --file-check 'npm run lint'
-⠏ Watching for comments with "@ai"....
 ```
 
-2. Add a comment
+Add a comment:
 
 ```typescript
 // @ai add a test case to divide by 0
@@ -29,8 +26,6 @@ describe("division", () => {
   });
 });
 ```
-
-3. `hands-please` runs an agent until the checks pass
 
 ```bash
 $ npx hands-please@latest --agent 'claude --print --output-format stream-json --verbose --allowedTools "Edit,Write,WebFetch"' --check 'npm run check' --file-check 'npm run lint'

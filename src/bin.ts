@@ -17,29 +17,30 @@ consola.options.formatOptions = {
 const main = defineCommand({
   meta: {
     name: "hands-please",
-    version: "0.0.4",
+    version: "0.0.5",
     description: "Run CLI code agents based on comments in your codebase.",
   },
   args: {
     agent: {
       type: "string",
       required: true,
-      description: "The command to run",
+      description:
+        "The CLI code agent command, needs to accept prompt from stdin",
     },
     check: {
       type: "string",
       required: true,
-      description: "The command to run to check the code",
+      description: "The command to check the full codebase",
     },
     trigger: {
       type: "string",
-      description:
-        "The tag that triggers the comment to be processed by the agent",
+      description: "The tag that hands-please looks for to trigger the agent",
       default: "@ai",
     },
     fileCheck: {
       type: "string",
-      description: "The file check command to run",
+      description:
+        "The command to check specific files, must accept a list of files as arguments",
     },
     skipWatch: {
       type: "boolean",

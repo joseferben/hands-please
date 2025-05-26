@@ -1,6 +1,6 @@
 {
   "name": "hands-please",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "description": "Run CLI code agents based on comments in your codebase.",
   "files": [

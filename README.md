@@ -6,9 +6,8 @@
 
 `hands-please`
 
-1. watches the codebase for `// @ai do something`
-2. runs Claude Code or OpenAI Codex in the background with the prompt from the comment
-3. fixes build/lint issues
+1. Watch codebase for `// @ai fix this code`
+2. Run an agent like Claude Code in the background with the prompt from the comment until lint/build passes
 
 ## Example
 

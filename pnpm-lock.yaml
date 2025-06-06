@@ -34,7 +34,7 @@ importers:
         version: 1.8.3
       zod:
         specifier: ^3.24.4
-        version: 3.25.53
+        version: 3.25.56
     devDependencies:
       '@eslint/js':
         specifier: ^9.27.0
@@ -50,7 +50,7 @@ importers:
         version: 1.7.5
       ai:
         specifier: ^4.3.16
-        version: 4.3.16(react@19.1.0)(zod@3.25.53)
+        version: 4.3.16(react@19.1.0)(zod@3.25.56)
       eslint:
         specifier: ^9.27.0
         version: 9.28.0
@@ -1476,38 +1476,38 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.25.53:
-    resolution: {integrity: sha512-BKOKoY3XcGUVkqaalCtFK15LhwR0G0i65AClFpWSXLN2gJNBGlTktukHgwexCTa/dAacPPp9ReryXPWyeZF4LQ==}
+  zod@3.25.56:
+    resolution: {integrity: sha512-rd6eEF3BTNvQnR2e2wwolfTmUTnp70aUTqr0oaGbHifzC3BKJsoV+Gat8vxUMR1hwOKBs6El+qWehrHbCpW6SQ==}
 
 snapshots:
 
-  '@ai-sdk/provider-utils@2.2.8(zod@3.25.53)':
+  '@ai-sdk/provider-utils@2.2.8(zod@3.25.56)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
       nanoid: 3.3.11
       secure-json-parse: 2.7.0
-      zod: 3.25.53
+      zod: 3.25.56
 
   '@ai-sdk/provider@1.1.3':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.2.12(react@19.1.0)(zod@3.25.53)':
+  '@ai-sdk/react@1.2.12(react@19.1.0)(zod@3.25.56)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.53)
-      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.53)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.56)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.56)
       react: 19.1.0
       swr: 2.3.3(react@19.1.0)
       throttleit: 2.1.0
     optionalDependencies:
-      zod: 3.25.53
+      zod: 3.25.56
 
-  '@ai-sdk/ui-utils@1.2.11(zod@3.25.53)':
+  '@ai-sdk/ui-utils@1.2.11(zod@3.25.56)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.53)
-      zod: 3.25.53
-      zod-to-json-schema: 3.24.5(zod@3.25.53)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.56)
+      zod: 3.25.56
+      zod-to-json-schema: 3.24.5(zod@3.25.56)
 
   '@esbuild/aix-ppc64@0.25.4':
     optional: true
@@ -1905,15 +1905,15 @@ snapshots:
 
   acorn@8.14.1: {}
 
-  ai@4.3.16(react@19.1.0)(zod@3.25.53):
+  ai@4.3.16(react@19.1.0)(zod@3.25.56):
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.53)
-      '@ai-sdk/react': 1.2.12(react@19.1.0)(zod@3.25.53)
-      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.53)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.25.56)
+      '@ai-sdk/react': 1.2.12(react@19.1.0)(zod@3.25.56)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.25.56)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
-      zod: 3.25.53
+      zod: 3.25.56
     optionalDependencies:
       react: 19.1.0
 
@@ -2782,8 +2782,8 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.24.5(zod@3.25.53):
+  zod-to-json-schema@3.24.5(zod@3.25.56):
     dependencies:
-      zod: 3.25.53
+      zod: 3.25.56
 
-  zod@3.25.53: {}
+  zod@3.25.56: {}

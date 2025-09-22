@@ -21,7 +21,7 @@
   },
   "author": "Josef Erben <josef@erben.systems>",
   "license": "MIT",
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@tsconfig/strictest": "^2.0.5",

@@ -20,7 +20,7 @@ jobs:
         with:
           version: 10.18.1
       - name: use node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"

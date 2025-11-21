@@ -41,7 +41,7 @@ importers:
         version: 9.39.1
       '@tsconfig/strictest':
         specifier: ^2.0.5
-        version: 2.0.6
+        version: 2.0.8
       '@types/node':
         specifier: ^22.15.18
         version: 22.19.1
@@ -767,8 +767,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@tsconfig/strictest@2.0.6':
-    resolution: {integrity: sha512-tPOhmDhIUcDjvpDDYyiUdssP84Eqm7n5KxJe5J3/g+s6xoDIPAf+SIn06dhw7VkhxIvLOnhDDrX7tsqMHNEhDg==}
+  '@tsconfig/strictest@2.0.8':
+    resolution: {integrity: sha512-XnQ7vNz5HRN0r88GYf1J9JJjqtZPiHt2woGJOo2dYqyHGGcd6OLGqSlBB6p1j9mpzja6Oe5BoPqWmeDx6X9rLw==}
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
@@ -2155,7 +2155,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.53.3':
     optional: true
 
-  '@tsconfig/strictest@2.0.6': {}
+  '@tsconfig/strictest@2.0.8': {}
 
   '@types/chai@5.2.3':
     dependencies:
